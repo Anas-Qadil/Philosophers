@@ -1,45 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/01 16:59:36 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/03 17:57:02 by aqadil           ###   ########.fr       */
+/*   Created: 2022/01/01 17:30:50 by aqadil            #+#    #+#             */
+/*   Updated: 2022/01/01 17:31:41 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#ifndef PHILO_H
+#define PHILO_H
 
-void	*thread1()
-{
-	while (1)
-	{
-		printf("my turn\n");
-		sleep(1);
-	}
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include <pthread.h>
+#include <unistd.h>
 
-void	*thread2()
-{
-	while (1)
-	{
-		printf("your turn\n");
-		sleep(1);
-	}
-}
 
-int main(int argc, char **argv)
-{
-	pthread_t t1;
-	pthread_t t2;
-
-	pthread_create(&t1, NULL, &thread1, NULL);
-	pthread_create(&t2, NULL, &thread2, NULL);
-	
-	pthread_join(t2, NULL);
-	pthread_join(t1, NULL);
-
-	return (0);
-}
+#endif
