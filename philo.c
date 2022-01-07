@@ -6,40 +6,46 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 16:59:36 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/03 17:57:02 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/07 18:19:33 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*thread1()
+pthread_mutex_t mutex;
+
+
+void	*my_turn(void *args)
 {
-	while (1)
+	int j = 0;
+	int *i = (int *)args;
+	while (j < 10000000)
 	{
-		printf("my turn\n");
-		sleep(1);
+		pthread_mutex_lock(&mutex);
+		(*i)++;
+		j++;
+		pthread_mutex_unlock(&mutex);
 	}
+	return (NULL);
 }
 
-void	*thread2()
-{
-	while (1)
-	{
-		printf("your turn\n");
-		sleep(1);
-	}
-}
 
-int main(int argc, char **argv)
+int main()
 {
-	pthread_t t1;
-	pthread_t t2;
-
-	pthread_create(&t1, NULL, &thread1, NULL);
-	pthread_create(&t2, NULL, &thread2, NULL);
+	pthread_t	t1;
+	pthread_t	t2;
+	int	*arg;
+	int	i = 0;
+	pthread_mutex_init(&mutex, NULL);
 	
-	pthread_join(t2, NULL);
+	
+	pthread_create(&t1, NULL, &my_turn, &i);
+	pthread_create(&t2, NULL, &my_turn, &i);
 	pthread_join(t1, NULL);
+	pthread_join(t2, NULL);
 
+	pthread_mutex_destroy(&mutex);
+	
+	printf("%d",i);
 	return (0);
 }
