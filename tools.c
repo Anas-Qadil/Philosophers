@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:10:32 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 21:45:31 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/08 22:41:29 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,16 @@ long long int time_diff(long long int old, long long int new)
 
     result = new - old;
     return (result);
+}
+
+void	put_message(t_data *philo_data, int	philo_id, char *message)
+{
+	pthread_mutex_lock(&(philo_data->message));
+	if (!(philo_data->philo_died))
+	{
+		printf("%lli ", philo_time() - philo_data->time_stamp);
+		printf("%i ", philo_id + 1);
+		printf("%s\n", message);
+	}
+	pthread_mutex_unlock(&(philo_data->message));
 }

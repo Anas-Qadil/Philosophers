@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:30:50 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 22:00:41 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/08 22:40:21 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,8 @@ long long int time_diff(long long int old, long long int new);
 
 // threading start
 void    *threading_start(void   *args);
+
+// messaging 
+void	put_message(t_data *philo_data, int	philo_id, char *message);
 
 #endif
