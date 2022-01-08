@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:30:50 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 17:59:09 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/08 22:00:41 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <unistd.h>
+#include <sys/time.h>
 
 struct s_data;
 
@@ -48,15 +49,22 @@ typedef struct s_data
 }   t_data;
 
 // tools functions
-
 int	ft_atoi(const char *str);
 
 // Error functions
-
 void    exit_error(int code);
+void    exit_error_v_2(int code);
 
-// main functions
+// init functions
 int init_data(t_data   *philo_data, char **argv);
 int init_mutex(t_data *philo_data);
+
+// runing those motherfuckers
+int start_philo(t_data *philo_data);
+long long int	philo_time(void);
+long long int time_diff(long long int old, long long int new);
+
+// threading start
+void    *threading_start(void   *args);
 
 #endif

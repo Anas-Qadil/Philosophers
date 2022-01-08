@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:10:32 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 16:10:44 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/08 21:45:31 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,23 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (result * sign);
+}
+
+long long int	philo_time(void)
+{
+	struct timeval current_time;
+	long long int result;
+	
+	if (gettimeofday(&current_time, NULL) == -1)
+		exit_error_v_2(20);
+	result = current_time.tv_sec * 1000;
+	return (result);
+}
+
+long long int time_diff(long long int old, long long int new)
+{
+    long long int result;
+
+    result = new - old;
+    return (result);
 }
