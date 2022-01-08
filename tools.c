@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   tools.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/01 16:59:36 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 18:09:46 by aqadil           ###   ########.fr       */
+/*   Created: 2022/01/08 16:10:32 by aqadil            #+#    #+#             */
+/*   Updated: 2022/01/08 16:10:44 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+int	ft_atoi(const char *str)
 {
-	t_data	philo_data;
-	
-	if (argc != 5 && argc != 6)
-		exit_error(1);
-	if (init_data(&philo_data, argv))
-		exit_error(2);
-	int total = philo_data.number_of_philo;
+	int	i;
+	int	sign;
+	int	result;
 
-	while (--total >= 0)
+	i = 0;
+	sign = 1;
+	result = 0;
+	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\r'
+		|| str[i] == '\f' || str[i] == '\v')
+		i++;
+	if (str[i] == '-')
+		sign = -1;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i] && str[i] >= '0' && str[i] <= '9')
 	{
-		printf("philo id : %d has left fork: %d and right fork : %d\n",philo_data.philo[total].philo_id, philo_data.philo[total].left_fork, philo_data.philo[total].right_fork);
+		result = (result * 10) + (str[i] - 48);
+		i++;
 	}
-	return (0);
+	return (result * sign);
 }

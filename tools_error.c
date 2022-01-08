@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.c                                            :+:      :+:    :+:   */
+/*   tools_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/01 16:59:36 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 18:09:46 by aqadil           ###   ########.fr       */
+/*   Created: 2022/01/08 17:14:40 by aqadil            #+#    #+#             */
+/*   Updated: 2022/01/08 17:48:51 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int main(int argc, char **argv)
+void    exit_error(int code)
 {
-	t_data	philo_data;
-	
-	if (argc != 5 && argc != 6)
-		exit_error(1);
-	if (init_data(&philo_data, argv))
-		exit_error(2);
-	int total = philo_data.number_of_philo;
-
-	while (--total >= 0)
-	{
-		printf("philo id : %d has left fork: %d and right fork : %d\n",philo_data.philo[total].philo_id, philo_data.philo[total].left_fork, philo_data.philo[total].right_fork);
-	}
-	return (0);
+    if (code == 1)
+        write(2, "Wrong Amount Of Argument\n", 25);
+    if (code == 2)
+        write(2, "Failed To Init The Philos\n", 26);
+    if (code == 3)
+        write(2, "Failed To Init The Mutex\n", 26);
+    if (code == 4)
+        write(2, "Faile To Init P\n", 21);
+    exit(-1);
 }
