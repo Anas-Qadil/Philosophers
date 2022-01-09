@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 21:05:00 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/09 21:34:15 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/10 00:23:28 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void    *threading_start(void   *args_philo)
     index = 0;
     philo = (t_philo *)args_philo;
     philo_data = philo->philo_data;
-    if (philo->philo_id)
+    if (philo->philo_id % 2)
         usleep(15000);
     while (!(philo_data->philo_died))
     {
@@ -70,7 +70,7 @@ void    check_philo_death(t_data *philo_data, t_philo *philo)
                 put_message(philo_data, index, "Died");
                 philo_data->philo_died = 1;
             }
-            usleep(100);
+            // usleep(100);
         }
         if (philo_data->philo_died)
             break;
