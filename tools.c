@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:10:32 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 22:41:29 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/09 21:45:29 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ int	ft_atoi(const char *str)
 	i = 0;
 	sign = 1;
 	result = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\r'
-		|| str[i] == '\f' || str[i] == '\v')
+	while (str[i] == ' ' || str[i] == '\n')
 		i++;
 	if (str[i] == '-')
 		sign = -1;
@@ -43,7 +42,7 @@ long long int	philo_time(void)
 	
 	if (gettimeofday(&current_time, NULL) == -1)
 		exit_error_v_2(20);
-	result = current_time.tv_sec * 1000;
+	result = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
 	return (result);
 }
 
@@ -65,4 +64,17 @@ void	put_message(t_data *philo_data, int	philo_id, char *message)
 		printf("%s\n", message);
 	}
 	pthread_mutex_unlock(&(philo_data->message));
+}
+
+void	time_to_sleep(long long int time, t_data *philo_data)
+{
+	long long int curr_time;
+
+	curr_time = philo_time();
+	while (!(philo_data->philo_died))
+	{
+		if (time_diff(curr_time, philo_time() >= time))
+			break ;
+		usleep(50);
+	}
 }

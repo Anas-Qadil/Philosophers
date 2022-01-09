@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 17:16:39 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 17:59:46 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/09 21:51:22 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,12 @@ void	init_philo(t_data *philo_data)
 		philo_data->philo[total].left_fork = total;
 		philo_data->philo[total].right_fork = (total + 1) % philo_data->number_of_philo;
 		philo_data->philo[total].last_meal = 0;
+		philo_data->philo[total].philo_ate = 0;
 		philo_data->philo[total].philo_data = philo_data;
 	}
 }
 
-int init_data(t_data   *philo_data, char **argv)
+int init_data(t_data *philo_data, char **argv)
 {
 	philo_data->number_of_philo = ft_atoi(argv[1]);
 	philo_data->time_to_die = ft_atoi(argv[2]);

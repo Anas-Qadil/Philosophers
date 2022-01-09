@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:30:50 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/08 22:40:21 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/09 21:07:13 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_philo
     int philo_ate;
     int left_fork;
     int right_fork;
-    int last_meal;
+    long long int last_meal;
     pthread_t   philo;
     struct s_data  *philo_data;
 }   t_philo;
@@ -43,9 +43,9 @@ typedef struct s_data
     int all_ate;
     long long int time_stamp;
     pthread_mutex_t meal;
-    pthread_mutex_t fork[100];
+    pthread_mutex_t fork[200];
     pthread_mutex_t message;
-    t_philo philo[100];
+    t_philo philo[200];
 }   t_data;
 
 // tools functions
@@ -69,5 +69,12 @@ void    *threading_start(void   *args);
 
 // messaging 
 void	put_message(t_data *philo_data, int	philo_id, char *message);
+
+// timing
+void	time_to_sleep(long long int time, t_data *philo_data);
+
+// join and exit
+void    join_and_destroy(t_data *philo_data, t_philo *philo);
+void    check_philo_death(t_data *philo_data, t_philo *philo);
 
 #endif
