@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:10:32 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/09 21:45:29 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/10 01:58:26 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,46 +35,41 @@ int	ft_atoi(const char *str)
 	return (result * sign);
 }
 
-long long int	philo_time(void)
+long long	timestamp(void)
 {
-	struct timeval current_time;
-	long long int result;
-	
-	if (gettimeofday(&current_time, NULL) == -1)
-		exit_error_v_2(20);
-	result = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
-	return (result);
+	struct timeval	t;
+
+	gettimeofday(&t, NULL);
+	return ((t.tv_sec * 1000) + (t.tv_usec / 1000));
 }
 
-long long int time_diff(long long int old, long long int new)
+long long	time_diff(long long past, long long pres)
 {
-    long long int result;
-
-    result = new - old;
-    return (result);
+	return (pres - past);
 }
 
-void	put_message(t_data *philo_data, int	philo_id, char *message)
+void		time_to_sleep(long long time, t_data *philo_data)
+{
+	long long i;
+
+	i = timestamp();
+	while (!(philo_data->philo_died))
+	{
+		if (time_diff(i, timestamp()) >= time)
+			break ;
+		usleep(50);
+	}
+}
+
+void		put_message(t_data *philo_data, int id, char *string)
 {
 	pthread_mutex_lock(&(philo_data->message));
 	if (!(philo_data->philo_died))
 	{
-		printf("%lli ", philo_time() - philo_data->time_stamp);
-		printf("%i ", philo_id + 1);
-		printf("%s\n", message);
+		printf("%lli ", timestamp() - philo_data->time_stamp);
+		printf("%i ", id + 1);
+		printf("%s\n", string);
 	}
 	pthread_mutex_unlock(&(philo_data->message));
-}
-
-void	time_to_sleep(long long int time, t_data *philo_data)
-{
-	long long int curr_time;
-
-	curr_time = philo_time();
-	while (!(philo_data->philo_died))
-	{
-		if (time_diff(curr_time, philo_time() >= time))
-			break ;
-		usleep(50);
-	}
+	return ;
 }
