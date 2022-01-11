@@ -6,31 +6,24 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 17:14:40 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/10 01:44:41 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/11 01:13:42 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
 #include "philo.h"
 
-int	write_error(char *str)
+void	put_error(int code)
 {
-	int len;
-
-	len = 0;
-	while (str[len])
-		len++;
-	write(2, "Error: ", 7);
-	write(2, str, len);
-	write(2, "\n", 1);
-	return (1);
-}
-
-int	error_manager(int error)
-{
-	if (error == 1)
-		return (write_error("wrong Amount Of argument"));
-	if (error == 2)
-		return (write_error("Uknowen error when intializing mutex"));
-	return (1);
+	if (code == 1)
+		write(2, "Wrong Amount Of Argument Try Again...\n", 39);
+	if (code == 2)
+		write(2, "Uknowen Error When Intializing Mutex\n", 37);
+	if (code == 3)
+		write(2, "There Was An Error Creating The Threads\n", 41);
+	if (code == 10)
+		write(2, "Number Of Times Each Philosopher Must Eat Cannot Be Negative Or Null...\n", 70);
+	if (code == 20)
+		write(2, "Invalide Entries... Try Again With Correct Ones...\n", 52);
+	exit(-1);
 }
