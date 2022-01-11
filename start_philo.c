@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 21:05:00 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/11 02:27:31 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:47:27 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	start_eating(t_philo *philo)
 	put_message(philo_data, philo->philo_id, "is eating");
 	philo->last_philo_meal = get_time();
 	pthread_mutex_unlock(&(philo_data->meal));
-	time_to_sleep(philo_data->time_to_eat, philo_data, 1);
+	time_to_sleep(philo_data->time_to_eat, philo_data, 1, philo->philo_id);
 	(philo->philo_ate)++;
 	pthread_mutex_unlock(&(philo_data->forks[philo->left_fork]));
 	pthread_mutex_unlock(&(philo_data->forks[philo->right_fork]));
@@ -51,7 +51,7 @@ void	*threading_start(void *void_philo)
 		if (philo_data->all_ate)
 			break ;
 		put_message(philo_data, philo->philo_id, "is sleeping");
-		time_to_sleep(philo_data->time_to_sleep, philo_data, 2);
+		time_to_sleep(philo_data->time_to_sleep, philo_data, 2, philo->philo_id);
 		put_message(philo_data, philo->philo_id, "is thinking");
 		usleep(50);
 	}
@@ -63,7 +63,7 @@ void	check_philo_death(t_data *philo_data, t_philo *philo)
 	int i;
 	int count = 0;
 
-	while (!(philo_data->all_ate) && (philo->philo_ate < philo_data->number_of_eat))
+	while (!(philo_data->all_ate))
 	{
 		i = -1;
 		while (++i < philo_data->number_of_philo && !(philo_data->philo_died))
@@ -79,9 +79,10 @@ void	check_philo_death(t_data *philo_data, t_philo *philo)
 		i = 0;
 		if (philo_data->number_of_eat != -1)
 		{
+			count = 0;
 			while (i < philo_data->number_of_philo)
 			{
-				if (philo[i].philo_ate == philo_data->number_of_eat)
+				if (philo[i].philo_ate >= philo_data->number_of_eat)
 					count++;
 				i++;
 			}
@@ -117,9 +118,7 @@ void	join_and_destroy(t_data *philo_data, t_philo *philos)
 
 	i = -1;
 	while (++i < philo_data->number_of_philo)
-		pthread_join(philos[i].philo, NULL);
-	i = -1;
-	while (++i < philo_data->number_of_philo)
 		pthread_mutex_destroy(&(philo_data->forks[i]));
 	pthread_mutex_destroy(&(philo_data->message));
+	pthread_mutex_destroy(&(philo_data->meal));
 }

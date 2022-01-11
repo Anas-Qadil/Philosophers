@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:30:50 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/11 01:46:49 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:47:16 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int				ft_atoi(const char *str);
 void			put_message(t_data *philo_data, int id, char *string);
 long long int	get_time(void);
 long long int	time_diff(long long int old, long long int new);
-void			time_to_sleep(long long int time, t_data *philo_data, int type_of_sleep);
+void			time_to_sleep(long long int time, t_data *philo_data, int type_of_sleep, int philo_id);
 int				start_philo(t_data *philo_data);
 void			join_and_destroy(t_data *philo_data, t_philo *philos);
 int				init_mutex(t_data *philo_data);

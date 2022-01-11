@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:10:32 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/11 01:49:37 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/11 20:47:46 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ long long int	time_diff(long long int old, long long int new)
 	return (result);
 }
 
-void		time_to_sleep(long long int time, t_data *philo_data, int type_of_sleep)
+void		time_to_sleep(long long int time, t_data *philo_data, int type_of_sleep, int philo_id)
 {
 	long long i;
 	int type;
@@ -69,6 +69,7 @@ void		time_to_sleep(long long int time, t_data *philo_data, int type_of_sleep)
 			if (time_diff(i, get_time()) >= philo_data->time_to_die)
 			{
 				philo_data->philo_died = 1;
+				put_message(philo_data, philo_id, "died");
 				break ;
 			}
 		}
@@ -86,5 +87,4 @@ void		put_message(t_data *philo_data, int id, char *string)
 		printf("%s\n", string);
 	}
 	pthread_mutex_unlock(&(philo_data->message));
-	return ;
 }
