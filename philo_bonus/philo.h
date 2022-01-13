@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:28:16 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 17:35:23 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 21:36:20 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 #include <semaphore.h>
 #include <fcntl.h>
 #include <sys/time.h>
+#include <signal.h>
 
 typedef	struct			s_philo
 {
@@ -64,5 +65,8 @@ void    *night_watch(void *arg_philo);
 
 void	put_message(t_data *philo_data, int id, char *message);
 void	time_to_sleep(int time, t_data *philo_data);
+
+
+void    close_things(t_data *philo_data);
 
 #endif

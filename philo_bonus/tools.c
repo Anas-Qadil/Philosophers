@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:19 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 17:29:02 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 23:51:01 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,11 +75,6 @@ void	time_to_sleep(int time, t_data *philo_data)
 	{
 		if (time_diff(current_time, get_time()) >= time)
 			break ;
-		if (time_diff(current_time, get_time()) >= philo_data->time_to_die)
-		{
-			philo_data->philo_died = 1;
-			break ;
-		}
 		usleep(50);
 	}
 }
