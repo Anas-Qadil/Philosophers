@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:19 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 16:27:31 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:29:02 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,10 +56,30 @@ long long int	time_diff(long long int old, long long int new)
 
 void	put_message(t_data *philo_data, int id, char *message)
 {
-	
+	sem_wait(philo_data->message);
+	if (!(philo_data->philo_died))
+	{
+		printf("%lli ", get_time() - philo_data->time_stamp);
+		printf("%d ", id + 1);
+		printf("%s\n", message);
+	}
+	sem_post(philo_data->message);
 }
 
 void	time_to_sleep(int time, t_data *philo_data)
 {
-	
+	long long int current_time;
+
+	current_time = get_time();
+	while (!(philo_data->philo_died))
+	{
+		if (time_diff(current_time, get_time()) >= time)
+			break ;
+		if (time_diff(current_time, get_time()) >= philo_data->time_to_die)
+		{
+			philo_data->philo_died = 1;
+			break ;
+		}
+		usleep(50);
+	}
 }

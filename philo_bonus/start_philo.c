@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:15 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 16:25:34 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:34:00 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,22 @@ int    start_philo(t_data *philo_data)
 
 void    *night_watch(void *arg_philo)
 {
-    
+    t_philo *philo;
+    t_data  *philo_data;
+
+    philo = (t_philo *)arg_philo;
+    philo_data = philo->philo_data;
+    while (1)
+    {
+        if (time_diff(philo->last_philo_meal, get_time()) > philo_data->time_stamp)
+        {
+            put_message(philo_data, philo->philo_id, "died");
+            philo_data->philo_died = 1;
+            sem_wait(philo_data->message);
+            exit(1);
+        }
+        if (philo->philo_ate >= philo_data->number_of_eat && philo_data->number_of_eat != -1)
+            break ;
+    }
+    return (NULL);
 }

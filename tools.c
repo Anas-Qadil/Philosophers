@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 16:10:32 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/12 02:46:16 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 17:22:37 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void		put_message(t_data *philo_data, int id, char *string)
 	if (!(philo_data->philo_died))
 	{
 		printf("%lli ", get_time() - philo_data->time_stamp);
-		printf("%i ", id + 1);
+		printf("%d ", id + 1);
 		printf("%s\n", string);
 	}
 	pthread_mutex_unlock(&(philo_data->message));
