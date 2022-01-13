@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:09 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 01:45:19 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 15:57:17 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 int	init_semaphore(t_data *philo_data)
 {
-	sem_unlink("/forks");
-	sem_unlink("/message");
-	sem_unlink("/meal");
 	philo_data->forks = sem_open("/forks", O_CREAT, S_IRWXU, philo_data->number_of_philo);
 	philo_data->message = sem_open("/message", O_CREAT, S_IRWXU, 1);
 	philo_data->meal = sem_open("/meal", O_CREAT, S_IRWXU, 1);

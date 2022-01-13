@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:28:16 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 00:41:02 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:10:17 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,9 @@ long long int	get_time(void);
 long long int	time_diff(long long int old, long long int new);
 
 void	put_error(int code);
+
+int    start_philo(t_data *philo_data);
+void    start_process(t_philo *philo);
+void    *night_watch(void *arg_philo);
 
 #endif

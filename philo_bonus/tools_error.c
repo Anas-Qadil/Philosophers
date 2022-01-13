@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:17 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 00:42:14 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:01:27 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	put_error(int code)
 	if (code == 2)
 		write(2, "Uknowen Error When Intializing Semaphore\n", 42);
 	if (code == 3)
-		write(2, "There Was An Error Creating The Threads\n", 41);
+		write(2, "There Was An Error Creating The Process\n", 41);
 	if (code == 10)
 		write(2, "Number Of Times Each Philosopher Must Eat Cannot Be Negative Or Null...\n", 70);
 	if (code == 20)
