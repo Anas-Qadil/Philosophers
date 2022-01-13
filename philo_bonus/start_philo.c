@@ -23,8 +23,9 @@ void    start_eating(t_philo *philo)
     put_message(philo_data, philo->philo_id, "has taken a fork");
     sem_wait(philo_data->meal);
     put_message(philo_data, philo->philo_id, "is eating");
-    time_to_sleep(philo_data->time_to_eat, philo_data);
     sem_post(philo_data->meal);
+    time_to_sleep(philo_data->time_to_eat, philo_data);
+    (philo->philo_ate)++;
     sem_post(philo_data->forks);
     sem_post(philo_data->forks);
 }
@@ -82,13 +83,16 @@ void    *night_watch(void *arg_philo)
     philo_data = philo->philo_data;
     while (1)
     {
-        if (time_diff(philo->last_philo_meal, get_time()) > philo_data->time_stamp)
+        if (time_diff(philo->last_philo_meal, get_time()) > philo_data->time_to_die)
         {
             put_message(philo_data, philo->philo_id, "died");
             philo_data->philo_died = 1;
             sem_wait(philo_data->message);
             exit(1);
         }
+        if (philo_data->died)
+            break ;
+        usleep(1000);
         if (philo->philo_ate >= philo_data->number_of_eat && philo_data->number_of_eat != -1)
             break ;
     }
