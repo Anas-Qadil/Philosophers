@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 17:14:40 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/11 01:13:42 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 00:46:19 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,4 @@ void	put_error(int code)
 		write(2, "Number Of Times Each Philosopher Must Eat Cannot Be Negative Or Null...\n", 70);
 	if (code == 20)
 		write(2, "Invalide Entries... Try Again With Correct Ones...\n", 52);
-	exit(-1);
 }
