@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:15 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 16:15:34 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:25:34 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,19 @@
 
 void    start_eating(t_philo *philo)
 {
-    
+    t_data  *philo_data;
+
+    philo_data = philo->philo_data;
+    sem_wait(philo_data->forks);
+    put_message(philo_data, philo->philo_id, "has taken a fork");
+    sem_wait(philo_data->forks);
+    put_message(philo_data, philo->philo_id, "has taken a fork");
+    sem_wait(philo_data->meal);
+    put_message(philo_data, philo->philo_id, "is eating");
+    time_to_sleep(philo_data->time_to_eat, philo_data);
+    sem_post(philo_data->meal);
+    sem_post(philo_data->forks);
+    sem_post(philo_data->forks);
 }
 
 void    start_process(t_philo *philo)

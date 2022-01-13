@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:19 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/12 21:51:58 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 16:27:31 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,3 +54,12 @@ long long int	time_diff(long long int old, long long int new)
 	return (result);
 }
 
+void	put_message(t_data *philo_data, int id, char *message)
+{
+	
+}
+
+void	time_to_sleep(int time, t_data *philo_data)
+{
+	
+}
