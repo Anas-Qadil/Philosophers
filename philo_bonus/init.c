@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:09 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 15:57:17 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/13 20:21:50 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int init_data(t_data *philo_data, char **argv)
 	philo_data->number_of_philo = ft_atoi(argv[1]);
 	philo_data->time_to_die = ft_atoi(argv[2]);
 	philo_data->time_to_eat = ft_atoi(argv[3]);
-	philo_data->time_to_eat = ft_atoi(argv[4]);
+	philo_data->time_to_sleep = ft_atoi(argv[4]);
 	philo_data->philo_died = 0;
 	if (argv[5])
 	{
