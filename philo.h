@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/01 17:30:50 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/11 20:47:16 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/14 17:19:33 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@
 # include <string.h>
 # include <pthread.h>
 
-
-typedef	struct			s_philo
+typedef struct s_philo
 {
 	int					philo_id;
 	int					philo_ate;
@@ -31,15 +30,15 @@ typedef	struct			s_philo
 	long long int		last_philo_meal;
 	pthread_t			philo;
 	struct s_data		*philo_data;
-}						t_philo;
+}	t_philo;
 
-typedef struct			s_data
+typedef struct s_data
 {
-	int					number_of_philo;
+	int					n_philo;
 	int					time_to_die;
 	int					time_to_eat;
 	int					time_to_sleep;
-	int					number_of_eat;
+	int					n_eat;
 	int					philo_died;
 	int					all_ate;
 	long long int		time_stamp;
@@ -55,9 +54,9 @@ int				ft_atoi(const char *str);
 void			put_message(t_data *philo_data, int id, char *string);
 long long int	get_time(void);
 long long int	time_diff(long long int old, long long int new);
-void			time_to_sleep(long long int time, t_data *philo_data, int type_of_sleep, int philo_id);
+void			time_to_sleep(long long int time, t_data *philo_data);
 int				start_philo(t_data *philo_data);
-void			join_and_destroy(t_data *philo_data, t_philo *philos);
+void			join_and_destroy(t_data *philo_data);
 int				init_mutex(t_data *philo_data);
 int				init_philo(t_data *philo_data);
 

@@ -6,12 +6,11 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:19 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 23:51:01 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/14 02:25:17 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
 
 int	ft_atoi(const char *str)
 {
@@ -39,7 +38,7 @@ int	ft_atoi(const char *str)
 long long int	get_time(void)
 {
 	struct timeval	current_time;
-	long long int result;
+	long long int	result;
 
 	gettimeofday(&current_time, NULL);
 	result = (current_time.tv_sec * 1000) + (current_time.tv_usec / 1000);
@@ -48,7 +47,7 @@ long long int	get_time(void)
 
 long long int	time_diff(long long int old, long long int new)
 {
-	long long int result;
+	long long int	result;
 
 	result = new - old;
 	return (result);
@@ -68,7 +67,7 @@ void	put_message(t_data *philo_data, int id, char *message)
 
 void	time_to_sleep(int time, t_data *philo_data)
 {
-	long long int current_time;
+	long long int	current_time;
 
 	current_time = get_time();
 	while (!(philo_data->philo_died))
