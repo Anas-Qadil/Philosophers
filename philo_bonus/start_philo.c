@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:15 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 21:41:50 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/14 00:50:42 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,14 @@ void    start_process(t_philo *philo)
     pthread_create(&(philo->philo_thread), NULL, night_watch, philo);
     if (philo->philo_id % 2)
         usleep(15000);
-    while (!(philo_data->philo_died))
+    while (!(philo_data->philo_died) && !(philo->philo_done_eating))
     {
         start_eating(philo);
-        if (philo_data->number_of_eat != -1 && philo->philo_ate >= philo_data->number_of_philo)
-            break;
+        if (philo_data->number_of_eat != -1 && philo->philo_ate >= philo_data->number_of_eat)
+        {
+            philo->philo_done_eating = 1;   
+            break ;
+        }
         put_message(philo_data, philo->philo_id, "is sleeping");
         time_to_sleep(philo_data->time_to_sleep, philo_data);
         put_message(philo_data, philo->philo_id, "is thinking");
@@ -81,19 +84,10 @@ void    close_things(t_data *philo_data)
     int i;
     int j;
 
-    i = 0;
-    while(i < philo_data->number_of_philo)
-    {
-        waitpid(-1, &j, 0);
-        if (j != 0)
-        {
-            i = -1;
-            while (++i < philo_data->number_of_philo)
-                kill(philo_data->philo[i].process_id, 15);
-            break ;
-        }
-        i++;
-    }
+    waitpid(-1, 0, 0);
+    i = -1;
+    while (++i < philo_data->number_of_philo)
+        kill(philo_data->philo[i].process_id, 15);
     sem_close(philo_data->forks);
     sem_close(philo_data->message);
     sem_close(philo_data->meal);
@@ -111,6 +105,8 @@ void    *night_watch(void *arg_philo)
     philo_data = philo->philo_data;
     while (1)
     {
+        if (philo->philo_done_eating == 1)
+            break ;
         if (time_diff(philo->last_philo_meal, get_time()) > philo_data->time_to_die)
         {
             put_message(philo_data, philo->philo_id, "died");
@@ -121,8 +117,6 @@ void    *night_watch(void *arg_philo)
         if (philo_data->philo_died)
             break ;
         usleep(1000);
-        if (philo->philo_ate >= philo_data->number_of_eat && philo_data->number_of_eat != -1)
-            break ;
     }
     return (NULL);
 }

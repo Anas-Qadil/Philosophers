@@ -6,7 +6,7 @@
 /*   By: aqadil <aqadil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/12 20:34:09 by aqadil            #+#    #+#             */
-/*   Updated: 2022/01/13 21:19:43 by aqadil           ###   ########.fr       */
+/*   Updated: 2022/01/14 00:05:23 by aqadil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	init_philo(t_data *philo_data)
 		philo_data->philo[i].philo_id = i;
 		philo_data->philo[i].philo_ate = 0;
 		philo_data->philo[i].last_philo_meal = 0;
+		philo_data->philo[i].philo_done_eating = 0;
 		philo_data->philo[i].philo_data = philo_data;
 	}
 }
